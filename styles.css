@@ -1,0 +1,198 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+    margin: 1rem;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+.main-content {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.card-pool, .input-section {
+    flex: 1;
+    min-width: 300px;
+}
+
+.card-pool h2, .drop-zone h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #34495e;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.card {
+    padding: 0.5rem;
+    color: white;
+    border-radius: 5px;
+    cursor: grab;
+    user-select: none;
+    transition: background-color 0.3s ease;
+}
+
+.card[data-suit="H"] {
+    background-color: #e74c3c;
+}
+
+.card[data-suit="D"] {
+    background-color: #3498db;
+}
+
+.card[data-suit="C"] {
+    background-color: #27ae60;
+}
+
+.card[data-suit="S"] {
+    background-color: #111;
+}
+
+.card:hover {
+    opacity: 0.9;
+}
+
+.drop-zone {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    min-height: 100px;
+    position: relative;
+}
+
+.drop-zone .cards {
+    min-height: 50px;
+}
+
+.clear-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.5rem;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.clear-button:hover {
+    background-color: #c0392b;
+}
+
+.num-players {
+    margin-bottom: 1rem;
+}
+
+.num-players label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.num-players input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#calculateButton {
+    padding: 0.75rem;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+#calculateButton:hover {
+    background-color: #219653;
+}
+
+#result {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.legend {
+    position: fixed;
+    left: 9rem;
+    top: 4rem;
+    max-width: 250px;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.legend img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.suit-group {
+    margin-bottom: 1rem;
+}
+
+.suit-group h3 {
+    font-size: 1.2rem;
+    color: #34495e;
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .suit-group {
+        width: 100%;
+    }
+
+    .suit-group .cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .legend {
+        display: none;
+    }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Win Probability Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Poker Win Probability Calculator</h1>
+        <div class="main-content">
+            <div class="card-pool">
+                <h2>Cards</h2>
+                <div class="suit-group" data-suit="H">
+                    <h3>Heart (H)</h3>
+                    <div class="cards"></div>
+                </div>
+                <div class="suit-group" data-suit="D">
+                    <h3>Diamond( D)</h3>
+                    <div class="cards"></div>
+                </div>
+                <div class="suit-group" data-suit="C">
+                    <h3>Club (C)</h3>
+                    <div class="cards"></div>
+                </div>
+                <div class="suit-group" data-suit="S">
+                    <h3>Spade (S)</h3>
+                    <div class="cards"></div>
+                </div>
+            </div>
+            <div class="input-section">
+                <div class="drop-zone" id="playerCardsZone">
+                    <h2>Your Cards</h2>
+                    <button class="clear-button" data-target="playerCardsZone">Delete</button>
+                    <div class="cards"></div>
+                </div>
+                <div class="drop-zone" id="tableCardsZone">
+                    <h2>Table Cards</h2>
+                    <button class="clear-button" data-target="tableCardsZone">Delete</button>
+                    <div class="cards"></div>
+                </div>
+                <div class="num-players">
+                    <label for="numPlayers">Number of Players:</label>
+                    <input type="number" id="numPlayers" name="numPlayers" required>
+                </div>
+                <button id="calculateButton">Calculate</button>
+                <div id="result"></div>
+            </div>
+        </div>
+    </div>
+    <div class="legend">
+        <img src="jpgs/1.jpg" alt="Cards definition">
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
