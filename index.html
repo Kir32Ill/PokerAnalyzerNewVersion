@@ -3,55 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poker Win Probability Calculator</title>
+    <title>Advanced Poker Odds Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Poker Win Probability Calculator</h1>
-        <div class="main-content">
-            <div class="card-pool">
-                <h2>Cards</h2>
-                <div class="suit-group" data-suit="H">
-                    <h3>Heart (H)</h3>
-                    <div class="cards"></div>
+        <div class="header">
+            <h1><i class="fas fa-calculator"></i> Advanced Poker Odds Calculator</h1>
+            <button id="helpButton" class="help-button"><i class="fas fa-question-circle"></i> Help</button>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-button active" data-tab="calculator">Calculator</button>
+            <button class="tab-button" data-tab="history">History</button>
+            <button class="tab-button" data-tab="stats">Statistics</button>
+        </div>
+        
+        <div class="tab-content active" id="calculator">
+            <div class="main-content">
+                <div class="card-pool">
+                    <h2><i class="fas fa-cards"></i> Card Deck</h2>
+                    <div class="search-box">
+                        <input type="text" id="cardSearch" placeholder="Search cards...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="suit-group" data-suit="H">
+                        <h3><i class="suit-icon heart">♥</i> Hearts</h3>
+                        <div class="cards"></div>
+                    </div>
+                    <div class="suit-group" data-suit="D">
+                        <h3><i class="suit-icon diamond">♦</i> Diamonds</h3>
+                        <div class="cards"></div>
+                    </div>
+                    <div class="suit-group" data-suit="C">
+                        <h3><i class="suit-icon club">♣</i> Clubs</h3>
+                        <div class="cards"></div>
+                    </div>
+                    <div class="suit-group" data-suit="S">
+                        <h3><i class="suit-icon spade">♠</i> Spades</h3>
+                        <div class="cards"></div>
+                    </div>
                 </div>
-                <div class="suit-group" data-suit="D">
-                    <h3>Diamond (D)</h3>
-                    <div class="cards"></div>
-                </div>
-                <div class="suit-group" data-suit="C">
-                    <h3>Club (C)</h3>
-                    <div class="cards"></div>
-                </div>
-                <div class="suit-group" data-suit="S">
-                    <h3>Spade (S)</h3>
-                    <div class="cards"></div>
+                
+                <div class="input-section">
+                    <div class="drop-zone" id="playerCardsZone">
+                        <h2><i class="fas fa-user"></i> Your Hand (2 cards)</h2>
+                        <button class="clear-button" data-target="playerCardsZone"><i class="fas fa-trash"></i></button>
+                        <div class="cards"></div>
+                    </div>
+                    
+                    <div class="drop-zone" id="tableCardsZone">
+                        <h2><i class="fas fa-table"></i> Community Cards (0-5 cards)</h2>
+                        <button class="clear-button" data-target="tableCardsZone"><i class="fas fa-trash"></i></button>
+                        <div class="cards"></div>
+                    </div>
+                    
+                    <div class="settings">
+                        <div class="setting-group">
+                            <label for="numPlayers"><i class="fas fa-users"></i> Opponents:</label>
+                            <input type="number" id="numPlayers" min="1" max="9" value="1">
+                        </div>
+                        
+                        <div class="setting-group">
+                            <label for="simulations"><i class="fas fa-cogs"></i> Simulations:</label>
+                            <select id="simulations">
+                                <option value="1000">1,000 (Fast)</option>
+                                <option value="5000" selected>5,000 (Balanced)</option>
+                                <option value="10000">10,000 (Accurate)</option>
+                                <option value="50000">50,000 (Precise)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button id="calculateButton" class="calculate-btn">
+                        <i class="fas fa-play"></i> Calculate Odds
+                    </button>
+                    
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar" id="progressBar"></div>
+                        <span class="progress-text" id="progressText">0%</span>
+                    </div>
+                    
+                    <div class="result-container" id="result">
+                        <div class="result-header">
+                            <i class="fas fa-chart-pie"></i> Results
+                        </div>
+                        <div class="result-content">
+                            <div class="result-item">
+                                <span>Win Probability:</span>
+                                <span id="winProbability">0%</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Tie Probability:</span>
+                                <span id="tieProbability">0%</span>
+                            </div>
+                            <!-- <div class="result-item">
+                                <span>Hand Strength:</span>
+                                <span id="handStrength">-</span>
+                            </div> -->
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="input-section">
-                <div class="drop-zone" id="playerCardsZone">
-                    <h2>Your Cards</h2>
-                    <button class="clear-button" data-target="playerCardsZone">Delete</button>
-                    <div class="cards"></div>
+        </div>
+        
+        <div class="tab-content" id="history">
+            <h2><i class="fas fa-history"></i> Calculation History</h2>
+            <div class="history-list" id="historyList">
+                <div class="empty-history">
+                    <i class="fas fa-clock"></i>
+                    <p>No calculations yet</p>
                 </div>
-                <div class="drop-zone" id="tableCardsZone">
-                    <h2>Table Cards</h2>
-                    <button class="clear-button" data-target="tableCardsZone">Delete</button>
-                    <div class="cards"></div>
+            </div>
+            <button id="clearHistory" class="clear-history-btn">
+                <i class="fas fa-trash"></i> Clear History
+            </button>
+        </div>
+        
+        <div class="tab-content" id="stats">
+            <h2><i class="fas fa-chart-line"></i> Statistics</h2>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalCalculations">0</div>
+                    <div class="stat-label">Total Calculations</div>
                 </div>
-                <div class="num-players">
-                    <label for="numPlayers">Number of Players:</label>
-                    <input type="number" id="numPlayers" name="numPlayers" required>
+                <!-- <div class="stat-card">
+                    <div class="stat-value" id="bestHand">-</div>
+                    <div class="stat-label">Best Hand</div>
+                </div> -->
+                <div class="stat-card">
+                    <div class="stat-value" id="highestWinRate">0%</div>
+                    <div class="stat-label">Highest Win Rate</div>
                 </div>
-                <button id="calculateButton">Calculate</button>
-                <div id="result"></div>
+            </div>
+            <div class="chart-container">
+                <canvas id="historyChart"></canvas>
             </div>
         </div>
     </div>
+    
     <div class="legend">
-        <img src="1.jpg" alt="Cards definition">
+        <div class="legend-header">
+            <h3><i class="fas fa-info-circle"></i> Card Legend</h3>
+            <button class="close-legend"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="legend-content">
+            <div class="legend-item">
+                <div class="legend-card H">A♥</div>
+                <span>Ace of Hearts</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-card D">K♦</div>
+                <span>King of Diamonds</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-card C">Q♣</div>
+                <span>Queen of Clubs</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-card S">J♠</div>
+                <span>Jack of Spades</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-card">T♥</div>
+                <span>10 of Hearts</span>
+            </div>
+        </div>
+        <div class="hand-ranking">
+            <h4>Hand Rankings:</h4>
+            <ol>
+                <li>Royal Flush</li>
+                <li>Straight Flush</li>
+                <li>Four of a Kind</li>
+                <li>Full House</li>
+                <li>Flush</li>
+                <li>Straight</li>
+                <li>Three of a Kind</li>
+                <li>Two Pair</li>
+                <li>One Pair</li>
+                <li>High Card</li>
+            </ol>
+        </div>
     </div>
+    
+    <div class="tutorial" id="tutorial">
+        <div class="tutorial-content">
+            <h2><i class="fas fa-graduation-cap"></i> Poker Odds Calculator Tutorial</h2>
+            <div class="tutorial-step active">
+                <h3>Step 1: Select Your Cards</h3>
+                <p>Click on two cards from the deck to add them to your hand.</p>
+                <div class="tutorial-cards">
+                    <div class="card H">AH</div>
+                    <div class="card D">KD</div>
+                </div>
+            </div>
+            <div class="tutorial-step">
+                <h3>Step 2: Add Community Cards</h3>
+                <p>Select 0-5 cards that are on the table (flop, turn, river).</p>
+                <div class="tutorial-cards">
+                    <div class="card C">5C</div>
+                    <div class="card S">TS</div>
+                    <div class="card H">2H</div>
+                </div>
+            </div>
+            <div class="tutorial-step">
+                <h3>Step 3: Set Opponents</h3>
+                <p>Enter the number of opponents you're facing (1-9).</p>
+                <div class="tutorial-input">
+                    <label>Opponents:</label>
+                    <input type="number" value="2" min="2" max="9" disabled>
+                </div>
+            </div>
+            <div class="tutorial-step">
+                <h3>Step 4: Calculate Odds</h3>
+                <p>Click "Calculate Odds" to see your winning probability.</p>
+                <button class="tutorial-btn" disabled><i class="fas fa-play"></i> Calculate Odds</button>
+            </div>
+            <div class="tutorial-navigation">
+                <button class="tutorial-prev"><i class="fas fa-chevron-left"></i> Back</button>
+                <div class="tutorial-dots"></div>
+                <button class="tutorial-next">Next <i class="fas fa-chevron-right"></i></button>
+                <button class="tutorial-skip">Skip Tutorial</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
